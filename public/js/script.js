@@ -60,10 +60,9 @@ const createPizza = async () => {
   const newPizza = await res.json()
   console.log('Pizza créée : ', newPizza)
 
-
   //nettoyage formulaire
-  document.getElementById('input-name').value = ' '
-  document.getElementById('input-price').value = ' '
+  document.getElementById('input-name').value = ''
+  document.getElementById('input-price').value = null
   loadPizzas()
 }
 

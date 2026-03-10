@@ -35,6 +35,7 @@ const index = pizzas.findIndex( p => p.id === id)
 
 export const removePizza = (id) => {
   const index = pizzas.findIndex(p => p.id === id)
-  if ( index === -1) return falsepizzas.splice(index, 1)
-    return true
+  if ( index === -1) return false
+  pizzas.splice(index, 1)
+  return true
 }
