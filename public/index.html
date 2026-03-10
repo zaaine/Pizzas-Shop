@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Pizza</title>
+</head>
+<body>
+  <h1>PIZZA SHOPS</h1>
+
+  <div id="pizza"></div>
+
+   <h1>🍕 La carte des pizzas</h1>
+  <div id="pizzas-list"> Liste des pizzas</div>
+  <hr>
+  
+
+
+  <div id="form-pizza">
+    <h2>Ajouter une pizza </h2>
+    <div id="form">
+    <input type="text" name="name" id="input-name" placeholder="Nom de la pizza">
+      <input type="number" name="prix" id="input-price" placeholder="prix">
+      <button type="submit" onclick="createPizza()" >Ajouter</button>
+    </div>
+  </div>
+
+  <hr>
+  <div id="pizza-detail"> 
+    <p class = "detail"> Détail </p>
+   </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

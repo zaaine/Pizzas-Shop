@@ -1,0 +1,26 @@
+# Node modules
+node_modules/
+
+# fichiers d'environnement (secrets)
+.env
+.env.local
+
+# fichiers de logs
+logs/
+*.log
+npm-debug.log*
+
+# fichiers système
+.DS_Store
+Thumbs.db
+
+# dossier de build
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# cache
+.cache/
