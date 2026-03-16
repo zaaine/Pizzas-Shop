@@ -8,30 +8,29 @@ export const getPizza = (req, res) => {
 };
 
 //Recuperer une pizza par son id
-export const getPizzaById = (req, res) => {
+export const getPizzaById = async (req, res) => {
   const pizza = findPizzaById(parseInt(req.params.id))
   if (!pizza) return res.status(404).json({ message: "Pizza non trouvée" })
   res.json(pizza)
 }
 
 //Créer une pizza
-export const  createPizza = (req, res) => {
+export const  createPizza = async (req, res) => {
   const {name, price} = req.body
-  const newPizza = insertPizza(name, price)
+  const newPizza = await insertPizza(name, price)
   res.status(201).json(newPizza)
 }
 
 // PATH sur une pizza
-export const updatePizza = (req, res) => {
-  const updated = modifyPizza(parseInt(req.params.id), req.body)
-  if(!updated) return res.statut(404).json({message : "Pizza non trouvé"})
+export const updatePizza = async (req, res) => {
+  const updated = await modifyPizza(parseInt(req.params.id), req.body)
+  if(!updated) return res.statut(404).json({message : "Pizza non trouvée"})
   res.json(updated)
   }
 
 //Supprimer une pizza
-export const deletePizza = (req,res) => {
-  const deleted  = removePizza(parseInt(req.params.id)) 
-  if ( !deleted) return res.status(404).json({ message : 'Pizza non trouvé'})
+export const deletePizza = async (req,res) => {
+  await removePizza(parseInt(req.params.id)) 
   res.status(200).json({ message : "Pizza supprimée"})
 }
 
