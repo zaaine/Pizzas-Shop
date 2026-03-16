@@ -2,14 +2,14 @@
 import { findAllPizzas, findPizzaById,insertPizza, modifyPizza, removePizza } from "../services/pizzaService.js";
 
 //Renvoyer un texte brut 
-export const getPizza = (req, res) => { 
-  const pizzas = findAllPizzas()
+export const getPizzas = async (req, res) => { 
+  const pizzas = await findAllPizzas()
   res.json(pizzas)
 };
 
 //Recuperer une pizza par son id
 export const getPizzaById = async (req, res) => {
-  const pizza = findPizzaById(parseInt(req.params.id))
+  const pizza = await findPizzaById(parseInt(req.params.id))
   if (!pizza) return res.status(404).json({ message: "Pizza non trouvée" })
   res.json(pizza)
 }
@@ -24,7 +24,7 @@ export const  createPizza = async (req, res) => {
 // PATH sur une pizza
 export const updatePizza = async (req, res) => {
   const updated = await modifyPizza(parseInt(req.params.id), req.body)
-  if(!updated) return res.statut(404).json({message : "Pizza non trouvée"})
+  if(!updated) return res.status(404).json({message : "Pizza non trouvée"})
   res.json(updated)
   }
 
