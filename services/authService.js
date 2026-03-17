@@ -2,14 +2,22 @@ import 'dotenv/config'
 import prisma from '../prisma/prisma.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { AppError } from '../utils/appError.js'
 
 
 //Créer un utilisateur
 export const registerUser = async (email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 10)
-  return await prisma.user.create({
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10)
+    return await prisma.user.create({
     data: {email, password : hashedPassword}
   })
+  } catch (error) {
+    if (error.code === 'P2002'){
+      throw new AppError("Cet email est déjà utilisé", 409) 
+    }
+     throw new AppError("Erreur lors de l'inscription", 500)
+  }
 }
 
 //verifier un utilisateur

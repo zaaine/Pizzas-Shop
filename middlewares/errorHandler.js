@@ -8,7 +8,7 @@ export const errorHandler = (err, req, res, next) => {
   const message = err.message || "Erreur interne du serveur"
 
   res.status(status).json({
-    succes: false,
+    success: false,
     message
   })
 }
