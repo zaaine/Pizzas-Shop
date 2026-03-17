@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.5.0",
   "engineVersion": "280c870be64f457428992c43c1f6d557fab6e29e",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider   = \"prisma-client\"\n  output     = \"../generated/prisma\"\n  engineType = \"client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Pizza {\n  id    Int    @id @default(autoincrement())\n  name  String\n  price Float\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider   = \"prisma-client\"\n  output     = \"../generated/prisma\"\n  engineType = \"client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  email    String @unique\n  password String\n}\n\nmodel Pizza {\n  id    Int    @id @default(autoincrement())\n  name  String\n  price Float\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -32,10 +32,10 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Pizza\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Pizza\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 config.parameterizationSchema = {
-  strings: JSON.parse("[\"where\",\"Pizza.findUnique\",\"Pizza.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"Pizza.findFirst\",\"Pizza.findFirstOrThrow\",\"Pizza.findMany\",\"data\",\"Pizza.createOne\",\"Pizza.createMany\",\"Pizza.createManyAndReturn\",\"Pizza.updateOne\",\"Pizza.updateMany\",\"Pizza.updateManyAndReturn\",\"create\",\"update\",\"Pizza.upsertOne\",\"Pizza.deleteOne\",\"Pizza.deleteMany\",\"having\",\"_count\",\"_avg\",\"_sum\",\"_min\",\"_max\",\"Pizza.groupBy\",\"Pizza.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"price\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"not\",\"contains\",\"startsWith\",\"endsWith\",\"set\",\"increment\",\"decrement\",\"multiply\",\"divide\"]"),
-  graph: "LwsQBhwAACQAMB0AAAQAEB4AACQAMB8CAAAAASABACYAISEIACcAIQEAAAABACABAAAAAQAgBhwAACQAMB0AAAQAEB4AACQAMB8CACUAISABACYAISEIACcAIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACADHwIAAAABIAEAAAABIQgAAAABAQgAAAkAIAMfAgAAAAEgAQAAAAEhCAAAAAEBCAAACwAwAQgAAAsAMAMfAgAvACEgAQAtACEhCAAuACECAAAAAQAgCAAADgAgAx8CAC8AISABAC0AISEIAC4AIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBRUAACgAIBYAACkAIBcAACwAIBgAACsAIBkAACoAIAYcAAAaADAdAAAXABAeAAAaADAfAgAbACEgAQAcACEhCAAdACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAYcAAAaADAdAAAXABAeAAAaADAfAgAbACEgAQAcACEhCAAdACENFQAAHwAgFgAAIAAgFwAAHwAgGAAAHwAgGQAAHwAgIgIAAAABIwIAAAAEJAIAAAAEJQIAAAABJgIAAAABJwIAAAABKAIAAAABKQIAIwAhDhUAAB8AIBgAACIAIBkAACIAICIBAAAAASMBAAAABCQBAAAABCUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBACEAISoBAAAAASsBAAAAASwBAAAAAQ0VAAAfACAWAAAgACAXAAAgACAYAAAgACAZAAAgACAiCAAAAAEjCAAAAAQkCAAAAAQlCAAAAAEmCAAAAAEnCAAAAAEoCAAAAAEpCAAeACENFQAAHwAgFgAAIAAgFwAAIAAgGAAAIAAgGQAAIAAgIggAAAABIwgAAAAEJAgAAAAEJQgAAAABJggAAAABJwgAAAABKAgAAAABKQgAHgAhCCICAAAAASMCAAAABCQCAAAABCUCAAAAASYCAAAAAScCAAAAASgCAAAAASkCAB8AIQgiCAAAAAEjCAAAAAQkCAAAAAQlCAAAAAEmCAAAAAEnCAAAAAEoCAAAAAEpCAAgACEOFQAAHwAgGAAAIgAgGQAAIgAgIgEAAAABIwEAAAAEJAEAAAAEJQEAAAABJgEAAAABJwEAAAABKAEAAAABKQEAIQAhKgEAAAABKwEAAAABLAEAAAABCyIBAAAAASMBAAAABCQBAAAABCUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBACIAISoBAAAAASsBAAAAASwBAAAAAQ0VAAAfACAWAAAgACAXAAAfACAYAAAfACAZAAAfACAiAgAAAAEjAgAAAAQkAgAAAAQlAgAAAAEmAgAAAAEnAgAAAAEoAgAAAAEpAgAjACEGHAAAJAAwHQAABAAQHgAAJAAwHwIAJQAhIAEAJgAhIQgAJwAhCCICAAAAASMCAAAABCQCAAAABCUCAAAAASYCAAAAAScCAAAAASgCAAAAASkCAB8AIQsiAQAAAAEjAQAAAAQkAQAAAAQlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEpAQAiACEqAQAAAAErAQAAAAEsAQAAAAEIIggAAAABIwgAAAAEJAgAAAAEJQgAAAABJggAAAABJwgAAAABKAgAAAABKQgAIAAhAAAAAAABLQEAAAABBS0IAAAAAS4IAAAAAS8IAAAAATAIAAAAATEIAAAAAQUtAgAAAAEuAgAAAAEvAgAAAAEwAgAAAAExAgAAAAEAAAAABRUABhYABxcACBgACRkACgAAAAAABRUABhYABxcACBgACRkACgECAQIDAQUGAQYHAQcIAQkKAQoMAgsNAwwPAQ0RAg4SBBETARIUARMVAhoYBRsZCw"
+  strings: JSON.parse("[\"where\",\"User.findUnique\",\"User.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"User.findFirst\",\"User.findFirstOrThrow\",\"User.findMany\",\"data\",\"User.createOne\",\"User.createMany\",\"User.createManyAndReturn\",\"User.updateOne\",\"User.updateMany\",\"User.updateManyAndReturn\",\"create\",\"update\",\"User.upsertOne\",\"User.deleteOne\",\"User.deleteMany\",\"having\",\"_count\",\"_avg\",\"_sum\",\"_min\",\"_max\",\"User.groupBy\",\"User.aggregate\",\"Pizza.findUnique\",\"Pizza.findUniqueOrThrow\",\"Pizza.findFirst\",\"Pizza.findFirstOrThrow\",\"Pizza.findMany\",\"Pizza.createOne\",\"Pizza.createMany\",\"Pizza.createManyAndReturn\",\"Pizza.updateOne\",\"Pizza.updateMany\",\"Pizza.updateManyAndReturn\",\"Pizza.upsertOne\",\"Pizza.deleteOne\",\"Pizza.deleteMany\",\"Pizza.groupBy\",\"Pizza.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"price\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"not\",\"contains\",\"startsWith\",\"endsWith\",\"email\",\"password\",\"set\",\"increment\",\"decrement\",\"multiply\",\"divide\"]"),
+  graph: "TxUgBiwAAEIAMC0AAAQAEC4AAEIAMC8CAAAAAT0BAAAAAT4BAD8AIQEAAAABACABAAAAAQAgBiwAAEIAMC0AAAQAEC4AAEIAMC8CAD4AIT0BAD8AIT4BAD8AIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACADLwIAAAABPQEAAAABPgEAAAABAQgAAAkAIAMvAgAAAAE9AQAAAAE-AQAAAAEBCAAACwAwAQgAAAsAMAMvAgBKACE9AQBIACE-AQBIACECAAAAAQAgCAAADgAgAy8CAEoAIT0BAEgAIT4BAEgAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBRUAAEsAIBYAAEwAIBcAAE8AIBgAAE4AIBkAAE0AIAYsAABBADAtAAAXABAuAABBADAvAgA0ACE9AQA1ACE-AQA1ACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAYsAAA9ADAtAAAdABAuAAA9ADAvAgAAAAEwAQA_ACExCABAACEBAAAAGgAgAQAAABoAIAYsAAA9ADAtAAAdABAuAAA9ADAvAgA-ACEwAQA_ACExCABAACEAAwAAAB0AIAMAAB4AMAQAABoAIAMAAAAdACADAAAeADAEAAAaACADAAAAHQAgAwAAHgAwBAAAGgAgAy8CAAAAATABAAAAATEIAAAAAQEIAAAiACADLwIAAAABMAEAAAABMQgAAAABAQgAACQAMAEIAAAkADADLwIASgAhMAEASAAhMQgASQAhAgAAABoAIAgAACcAIAMvAgBKACEwAQBIACExCABJACECAAAAHQAgCAAAKQAgAgAAAB0AIAgAACkAIAMAAAAaACAPAAAiACAQAAAnACABAAAAGgAgAQAAAB0AIAUVAABDACAWAABEACAXAABHACAYAABGACAZAABFACAGLAAAMwAwLQAAMAAQLgAAMwAwLwIANAAhMAEANQAhMQgANgAhAwAAAB0AIAMAAC8AMBQAADAAIAMAAAAdACADAAAeADAEAAAaACAGLAAAMwAwLQAAMAAQLgAAMwAwLwIANAAhMAEANQAhMQgANgAhDRUAADgAIBYAADkAIBcAADgAIBgAADgAIBkAADgAIDICAAAAATMCAAAABDQCAAAABDUCAAAAATYCAAAAATcCAAAAATgCAAAAATkCADwAIQ4VAAA4ACAYAAA7ACAZAAA7ACAyAQAAAAEzAQAAAAQ0AQAAAAQ1AQAAAAE2AQAAAAE3AQAAAAE4AQAAAAE5AQA6ACE6AQAAAAE7AQAAAAE8AQAAAAENFQAAOAAgFgAAOQAgFwAAOQAgGAAAOQAgGQAAOQAgMggAAAABMwgAAAAENAgAAAAENQgAAAABNggAAAABNwgAAAABOAgAAAABOQgANwAhDRUAADgAIBYAADkAIBcAADkAIBgAADkAIBkAADkAIDIIAAAAATMIAAAABDQIAAAABDUIAAAAATYIAAAAATcIAAAAATgIAAAAATkIADcAIQgyAgAAAAEzAgAAAAQ0AgAAAAQ1AgAAAAE2AgAAAAE3AgAAAAE4AgAAAAE5AgA4ACEIMggAAAABMwgAAAAENAgAAAAENQgAAAABNggAAAABNwgAAAABOAgAAAABOQgAOQAhDhUAADgAIBgAADsAIBkAADsAIDIBAAAAATMBAAAABDQBAAAABDUBAAAAATYBAAAAATcBAAAAATgBAAAAATkBADoAIToBAAAAATsBAAAAATwBAAAAAQsyAQAAAAEzAQAAAAQ0AQAAAAQ1AQAAAAE2AQAAAAE3AQAAAAE4AQAAAAE5AQA7ACE6AQAAAAE7AQAAAAE8AQAAAAENFQAAOAAgFgAAOQAgFwAAOAAgGAAAOAAgGQAAOAAgMgIAAAABMwIAAAAENAIAAAAENQIAAAABNgIAAAABNwIAAAABOAIAAAABOQIAPAAhBiwAAD0AMC0AAB0AEC4AAD0AMC8CAD4AITABAD8AITEIAEAAIQgyAgAAAAEzAgAAAAQ0AgAAAAQ1AgAAAAE2AgAAAAE3AgAAAAE4AgAAAAE5AgA4ACELMgEAAAABMwEAAAAENAEAAAAENQEAAAABNgEAAAABNwEAAAABOAEAAAABOQEAOwAhOgEAAAABOwEAAAABPAEAAAABCDIIAAAAATMIAAAABDQIAAAABDUIAAAAATYIAAAAATcIAAAAATgIAAAAATkIADkAIQYsAABBADAtAAAXABAuAABBADAvAgA0ACE9AQA1ACE-AQA1ACEGLAAAQgAwLQAABAAQLgAAQgAwLwIAPgAhPQEAPwAhPgEAPwAhAAAAAAABPwEAAAABBT8IAAAAAUAIAAAAAUEIAAAAAUIIAAAAAUMIAAAAAQU_AgAAAAFAAgAAAAFBAgAAAAFCAgAAAAFDAgAAAAEAAAAAAAAAAAAFFQAGFgAHFwAIGAAJGQAKAAAAAAAFFQAGFgAHFwAIGAAJGQAKAAAABRUAEBYAERcAEhgAExkAFAAAAAAABRUAEBYAERcAEhgAExkAFAECAQIDAQUGAQYHAQcIAQkKAQoMAgsNAwwPAQ0RAg4SBBETARIUARMVAhoYBRsZCxwbDB0cDB4fDB8gDCAhDCEjDCIlAiMmDSQoDCUqAiYrDicsDCgtDCkuAioxDysyFQ"
 }
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
@@ -70,8 +70,8 @@ export interface PrismaClientConstructor {
    * const prisma = new PrismaClient({
    *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
    * })
-   * // Fetch zero or more Pizzas
-   * const pizzas = await prisma.pizza.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    * 
    * Read more in our [docs](https://pris.ly/d/client).
@@ -94,8 +94,8 @@ export interface PrismaClientConstructor {
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Pizzas
- * const pizzas = await prisma.pizza.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -189,6 +189,16 @@ export interface PrismaClient<
   }>>
 
       /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
    * `prisma.pizza`: Exposes CRUD operations for the **Pizza** model.
     * Example usage:
     * ```ts

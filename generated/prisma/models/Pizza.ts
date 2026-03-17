@@ -308,19 +308,7 @@ export type PizzaSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
 export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number

@@ -1,8 +1,9 @@
 // routes/userRoutes.js
 import express from "express";
-import { getPizzaById, createPizza, deletePizza, updatePizza, getPizzas } from "../controllers/userController.js";
+import { getPizzaById, createPizza, deletePizza, updatePizza, getPizzas } from "../controllers/pizzaController.js";
 
 import { validatePizza } from "../middlewares/pizzaValidator.js";
+import { protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -13,8 +14,8 @@ router.get('/', (req, res) => {
 
 router.get("/pizzas", getPizzas);
 router.get('/pizzas/:id', getPizzaById)
-router.patch('/pizzas/:id', validatePizza, updatePizza)
-router.post('/pizzas', validatePizza, createPizza)
+router.patch('/pizzas/:id',protect, validatePizza, updatePizza)
+router.post('/pizzas',protect, validatePizza, createPizza)
 router.delete ('/pizzas/:id', deletePizza)
 
 export default router;
