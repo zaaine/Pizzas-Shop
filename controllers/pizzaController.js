@@ -1,5 +1,6 @@
 
 import { findAllPizzas, findPizzaById,insertPizza, modifyPizza, removePizza } from "../services/pizzaService.js";
+import prisma from '../prisma/prisma.js'
 
 //Renvoyer un texte brut 
 export const getPizzas = async (req, res) => { 

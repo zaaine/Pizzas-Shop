@@ -1,12 +1,8 @@
 import 'dotenv/config'
-import { PrismaPg } from '@prisma/adapter-pg'
-import {PrismaClient} from "@prisma/client"
+import prisma from '../prisma/prisma.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-
-const adapter = new PrismaPg ({ connectionString : process.env.DATABASE_URL})
-const prisma = new PrismaClient ({adapter})
 
 //Créer un utilisateur
 export const registerUser = async (email, password) => {
@@ -31,3 +27,4 @@ const token = jwt.sign(
 )
  return token
 }
+
