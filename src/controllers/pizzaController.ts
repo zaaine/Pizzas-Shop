@@ -41,7 +41,7 @@ export const  createPizza = async (req: Request, res: Response, next: NextFuncti
   } 
 }
 
-// PATH sur une pizza
+// PATCH sur une pizza
 export const updatePizza = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id as string)
